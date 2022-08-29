@@ -1,6 +1,10 @@
-import { IsString, IsNotEmpty, IsUrl } from 'class-validator'
+import { IsString, IsNotEmpty, IsUrl, IsObject } from 'class-validator'
+import { ObjectID } from 'bson';
 
 export class CreateSkill{
+
+  _id : ObjectID;
+
   @IsString()
   @IsNotEmpty()
   name : string;
@@ -10,12 +14,10 @@ export class CreateSkill{
   type : string;
 
   @IsString()
-  @IsNotEmpty()
   @IsUrl()
   uri : string;
 
   @IsString()
-  @IsNotEmpty()
   @IsUrl()
   repository : string;
 
@@ -25,5 +27,8 @@ export class CreateSkill{
 
   @IsString()
   description : string;
+
+  @IsObject()
+  meta : object;
 
 }

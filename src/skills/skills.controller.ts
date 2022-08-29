@@ -3,6 +3,7 @@ import { SkillsService } from './skills.service';
 import { ApiTags} from '@nestjs/swagger';
 import {CreateSkill} from './skills.dtos';
 
+
 @ApiTags('skills')
 @Controller('skills')
 export class SkillsController {
@@ -23,7 +24,7 @@ export class SkillsController {
 
   @Get(":id")
   getSkill(@Param('id') id : string) {
-    return { data : { msg : "puta" } } 
+    return this.skService.GetSkillById(id);
   }
     
 }

@@ -1,16 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { Db } from 'mongodb';
+import { SkillsResponse, SkillResponse } from './skills.parser'
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class SkillsService {
+ 
+  constructor(@Inject('MONGO') private database: Db) {}
 
-  GetAllSkills() {
-    const response = {
-      data : [],
-      links : {
-        self : "/skills"
-      }
-    }
+  skCollection = this.database.collection("Skills");
 
-    return response;
+  async GetAllSkills() {
+    return SkillsResponse( await this.skCollection.find().toArray());
   }
+
+  async GetSkillById( id : string ){
+    const skill = await this.skCollection.findOne({ _id :  new ObjectId(id) });
+  }
+
 }
