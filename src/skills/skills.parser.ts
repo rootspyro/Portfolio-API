@@ -1,10 +1,10 @@
 import {SkillEntity} from "./skills.entities";
 import { CreateSkill } from "./skills.dtos";
 
-export function SkillResponse(entity :  CreateSkill) : SkillEntity{
+export function SkillResponse(entity : any) : SkillEntity{
 
   return { 
-    id : entity._id,
+    id : entity._id.toString(),
     attributes : {
       name : entity.name,
       type : entity.type,

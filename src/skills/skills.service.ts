@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Db } from 'mongodb';
+import { Db, ObjectId } from 'mongodb';
 import { SkillsResponse, SkillResponse } from './skills.parser'
-import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class SkillsService {
@@ -10,12 +9,22 @@ export class SkillsService {
 
   skCollection = this.database.collection("Skills");
 
-  async GetAllSkills() {
-    return SkillsResponse( await this.skCollection.find().toArray());
+  private regexParser(data : string){
+
+    return new RegExp(`^${data}`, 'i');
+  }
+
+  async GetAllSkills(name : string, type: string) {
+    
+    return SkillsResponse( await this.skCollection.find(
+      { name : { "$regex" : this.regexParser(name) }, type : { '$regex' : this.regexParser(type) } }).toArray());
   }
 
   async GetSkillById( id : string ){
-    const skill = await this.skCollection.findOne({ _id :  new ObjectId(id) });
+
+    let skId = new ObjectId(id);
+    let skill = await this.skCollection.findOne({ _id : skId });
+    return { data : SkillResponse(skill) }
   }
 
 }

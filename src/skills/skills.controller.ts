@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Param} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query} from '@nestjs/common';
 import { SkillsService } from './skills.service';
 import { ApiTags} from '@nestjs/swagger';
-import {CreateSkill} from './skills.dtos';
 
 
 @ApiTags('skills')
@@ -11,15 +10,11 @@ export class SkillsController {
   constructor( private skService : SkillsService ){}
 
   @Get()
-  Skills() {
-    return this.skService.GetAllSkills();
-  }
-
-  @Post()
-  createSkill(@Body() payload : CreateSkill){
-
-    return { data : { msg : "hola mundo" } }
-
+  Skills(
+    @Query('name') name : string = '.',
+    @Query('type') type : string = '.',
+  ) {
+    return this.skService.GetAllSkills(name, type);
   }
 
   @Get(":id")

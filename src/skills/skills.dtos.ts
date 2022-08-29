@@ -1,9 +1,7 @@
 import { IsString, IsNotEmpty, IsUrl, IsObject } from 'class-validator'
-import { ObjectID } from 'bson';
+
 
 export class CreateSkill{
-
-  _id : ObjectID;
 
   @IsString()
   @IsNotEmpty()
