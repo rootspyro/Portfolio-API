@@ -1,3 +1,29 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
+@Schema({collection : "Skills"})
+export class Skills {
+  @Prop({required : true})
+  name: string;
+
+  @Prop({required : true})
+  type: string;
+
+  @Prop({required : true})
+  uri: string;
+
+  @Prop({required : true})
+  repository: string;
+
+  @Prop({required : true})
+  created_in: string;
+
+  @Prop({required : true})
+  description: string;
+
+}
+
+export const SkillsSchema = SchemaFactory.createForClass(Skills);
+
 export class SkillEntity { 
   id : string;
   attributes : { 
@@ -11,5 +37,4 @@ export class SkillEntity {
   links : {
     self : string
   };
-  meta : object;
 }

@@ -16,7 +16,6 @@ export function SkillResponse(entity : any) : SkillEntity{
     links : {
       self : `/skills/${entity._id}`
     },
-    meta : entity.meta
   } 
 }
 
