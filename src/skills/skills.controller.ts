@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param} from '@nestjs/common';
 import { SkillsService } from './skills.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags} from '@nestjs/swagger';
 import {CreateSkill} from './skills.dtos';
 
 @ApiTags('skills')
@@ -17,7 +17,6 @@ export class SkillsController {
   @Post()
   createSkill(@Body() payload : CreateSkill){
 
-    console.log(payload);
     return { data : { msg : "hola mundo" } }
 
   }
