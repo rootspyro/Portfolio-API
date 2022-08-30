@@ -16,6 +16,7 @@ export function SkillResponse(entity : any) : SkillEntity{
     links : {
       self : `/skills/${entity._id}`
     },
+    meta : entity.meta
   } 
 }
 
@@ -29,9 +30,6 @@ export function SkillsResponse( entity : any ) {
 
   let response = { 
     data : skills,
-    links : {
-      self : "/skills"
-    }
   }
 
   return response;

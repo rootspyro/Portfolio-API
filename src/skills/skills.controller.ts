@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Param, Query} from '@nestjs/common';
 import { SkillsService } from './skills.service';
 import { ApiTags} from '@nestjs/swagger';
+import { MongoIdPipe } from '../mongo-id.pipe';
 
 
-@ApiTags('skills')
+@ApiTags('Skills')
 @Controller('skills')
 export class SkillsController {
 
@@ -18,7 +19,7 @@ export class SkillsController {
   }
 
   @Get(":id")
-  getSkill(@Param('id') id : string) {
+  getSkill(@Param('id', MongoIdPipe) id : string) {
     return this.skService.GetSkillById(id);
   }
     

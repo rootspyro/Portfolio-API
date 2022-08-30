@@ -20,6 +20,9 @@ export class Skills {
   @Prop({required : true})
   description: string;
 
+  @Prop({type: Object})
+  meta : object;
+
 }
 
 export const SkillsSchema = SchemaFactory.createForClass(Skills);
@@ -37,4 +40,5 @@ export class SkillEntity {
   links : {
     self : string
   };
+  meta : object;
 }
