@@ -12,7 +12,8 @@ let server : Handler;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.setGlobalPrefix("api")
+  app.setGlobalPrefix("dev/api")
+
   //SWAGGER
   const options = new DocumentBuilder()
     .setTitle("Portfolio - API")
@@ -22,6 +23,8 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api/docs', app, document);
+
+  app.setGlobalPrefix("api")
 
   //VALIDATION
   app.useGlobalPipes(new ValidationPipe({
