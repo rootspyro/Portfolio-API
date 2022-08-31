@@ -198,7 +198,11 @@ class Tech {
 // EXPERIENCE SCHEMAS
 
 export class DeveloperExperience {
-  data : DeveloperJob[];
+  data : {
+    role : string,
+    years: number,
+    jobs : DeveloperJob[]
+  }
   links : {
     self : string;
     related : string;
@@ -207,6 +211,7 @@ export class DeveloperExperience {
 
 export class DeveloperJob {
   data : {
+    company_id : string;
     company_name : string;
     title : string;
     type_of_work : string;

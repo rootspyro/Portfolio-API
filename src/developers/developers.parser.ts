@@ -106,11 +106,13 @@ export function StudiesResponse(entity : any) : DeveloperStudies {
 export function ExperienceResponse(entity : any) : DeveloperExperience {
 
   let jobs = [];
+  let experience = entity.experience;
 
   entity.experience.jobs.map((job: any) => {
     jobs.push(
       {
         data : {
+          company_id : job.company_id,
           company_name : job.company_name,
           title : job.title,
           type_of_work : job.type_of_work,
@@ -127,7 +129,11 @@ export function ExperienceResponse(entity : any) : DeveloperExperience {
   });
   
   let response = { 
-    data : jobs,
+    data : {
+      role : experience.role,
+      years : experience.years,
+      jobs : jobs
+    },
     links : {
       self : `/developers/${entity._id}/experience`,
       related : "/companies"

@@ -23,13 +23,22 @@ export class Companies{
 export const CompaniesSchema = SchemaFactory.createForClass(Companies);
 
 export class CompanyEntity { 
-  id : string;
-  attributes : {
-    name : string;
-    country : string;
-    direction : string;
-    description : string;
-    contact : object;
+  data : {
+    id : string;
+    attributes : {
+      name : string;
+      country : string;
+      direction : string;
+      description : string;
+      contact : object;
+    }
   }
+  links : {
+    self : string;
+  }
+}
+
+export class CompaniesEntity {
+  data : CompaniesEntity[] 
 }
 

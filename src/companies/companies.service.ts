@@ -24,9 +24,7 @@ export class CompaniesService {
   }
 
   async GetCompanyById(id : string) { 
-
-    return { data : CompanyResponse(await this.companiesModel.findById(id)) };
-
+    return CompanyResponse(await this.companiesModel.findById(id));
   }
 
 }
