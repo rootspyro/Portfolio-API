@@ -16,7 +16,7 @@ To run this project, you will need to add the following environment variables to
 
 ```shell
 MONGODB_STR="mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]"
-SECRET="run command: openssl -hex 30"
+SECRET="run command: openssl rand -hex 30"
 ```
 
 You can also check the [.env.example](.env.example) file.
