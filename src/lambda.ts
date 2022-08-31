@@ -10,9 +10,27 @@ const APP_VERSION = process.env.npm_package_version;
 let server : Handler;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+   
+  const app = await NestFactory.create(AppModule, { cors : true });
 
   app.setGlobalPrefix("dev/api")
+
+  const whitelist = ['https://rootspyro.com', 'https://portfolio-ui-ten.vercel.app'];
+
+  app.enableCors({
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        console.log("allowed cors for:", origin)
+        callback(null, true)
+      } else {
+        console.log("blocked cors for:", origin)
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+    allowedHeaders: 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe',
+    methods: "GET,PUT,POST,DELETE,UPDATE,OPTIONS",
+    credentials: true,
+  });
 
   //SWAGGER
   const options = new DocumentBuilder()
