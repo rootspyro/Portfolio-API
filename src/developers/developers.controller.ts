@@ -48,5 +48,10 @@ export class DevelopersController {
   DevProjects(@Param('id', MongoIdPipe) id : string){
     return this.devService.getDevProjects(id);
   }
-  
+
+  @Get(":id/contact")
+  DevContact(@Param('id', MongoIdPipe) id : string){
+    return this.devService.getDevContact(id);
+  }
+
 }

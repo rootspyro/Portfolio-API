@@ -1,10 +1,77 @@
 import { 
+  DevelopersEntity,
+  DeveloperEntity,
   DeveloperStudies, 
   DeveloperExperience, 
   DeveloperSkills,
   DeveloperSkill,
-  DeveloperProjects
+  DeveloperProjects,
+  DeveloperContact
 } from './developers.entities';
+
+export function DevelopersResponse(entity : any) : DevelopersEntity { 
+
+  let response = {
+    data : []
+  }
+
+  entity.map((dev : any) => {
+
+    response.data.push(
+      {
+        data : {
+          id : dev._id,
+          attributes : {
+            nickname : dev.nickname,
+            name : dev.name,
+            lastname : dev.lastname,
+            birthdate : dev.birthdate,
+            citizenship : dev.citizenship,
+            country : dev.country,
+            region : dev.region,
+            city : dev.city,
+            img_uri : dev.city
+          }
+        },
+        links : {
+          self : `/developers/${dev._id}`
+        }
+      }
+    )
+  });
+
+  return response;
+}
+
+export function DeveloperResponse(entity : any) : DeveloperEntity { 
+
+  let response = { 
+    data : {
+      id : entity._id,
+      attributes : {
+        nickname : entity.nickname,
+        name : entity.name,
+        lastname : entity.lastname,
+        birthdate : entity.birthdate,
+        citizenship : entity.citizenship,
+        country : entity.country,
+        region : entity.region,
+        city : entity.city,
+        img_uri : entity.img_uri,
+        studies : StudiesResponse(entity),
+        skills : SkillsResponse(entity),
+        experience : ExperienceResponse(entity),
+        projects : ProjectsResponse(entity),
+        contact : ContactResponse(entity)
+      }
+    },
+    links : {
+      self : `/developers/${entity._id}`
+    }
+  }
+
+  return response;
+}
 
 export function StudiesResponse(entity : any) : DeveloperStudies {
 
@@ -22,8 +89,6 @@ export function StudiesResponse(entity : any) : DeveloperStudies {
       }
     }); 
   })
-
-  console.log(studies)
 
   let response = {
 
@@ -189,4 +254,26 @@ export function ProjectsResponse(entity : any) : DeveloperProjects {
     }
   }
   return response;
+}
+
+export function ContactResponse( entity : any ) : DeveloperContact {
+  
+  let data = entity.contact
+  
+  let response = {
+    data : {
+      web : data.web,
+      email : data.email,
+      github : data.github,
+      linkedin : data.linkedin,
+      twitter : data.twitter,
+      instagram : data.instagram
+    },
+    links : {
+      self : `/developers/${entity._id}/contact`
+    }
+  }
+
+  return response;
+
 }

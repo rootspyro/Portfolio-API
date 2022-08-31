@@ -134,7 +134,7 @@ export class DeveloperEntity {
       skills : DeveloperSkills;
       experience : DeveloperExperience;
       projects : DeveloperProjects;
-      contact : DeveloperExperience;
+      contact : DeveloperContact;
     }
   }
   links : {
@@ -261,7 +261,7 @@ export class ProjectTech {
 
 // CONTACT SCHEMAS 
 
-export class ProjectContact {
+export class DeveloperContact {
   data : {
     web : string;
     email : string;

@@ -3,12 +3,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Developers } from './developers.entities';
 import { 
+  DevelopersResponse,
+  DeveloperResponse,
   StudiesResponse,
   ExperienceResponse,
   FrontendResponse,
   BackendResponse,
   SkillsResponse,
-  ProjectsResponse
+  ProjectsResponse,
+  ContactResponse 
 } from './developers.parser'
 
 @Injectable()
@@ -16,11 +19,13 @@ export class DevelopersService {
   constructor(@InjectModel(Developers.name) private devModel : Model<Developers>){}
 
   async getAllDevs() {
-    return await this.devModel.find().exec();
+    let response = await this.devModel.find().exec();
+    return DevelopersResponse(response);
   } 
 
   async getDevById(id : string){
-    return await this.devModel.findById(id);
+    let response = await this.devModel.findById(id);
+    return DeveloperResponse(response);
   }
 
   async getDevStudies( id : string ) {
@@ -51,5 +56,10 @@ export class DevelopersService {
   async getDevProjects( id : string ) {
     let response = await this.devModel.findById(id , { 'projects' : 1 })
     return ProjectsResponse(response);
+  }
+
+  async getDevContact( id : string ) {
+    let response = await this.devModel.findById(id, { 'contact' : 1 })
+    return ContactResponse(response);
   }
 }
