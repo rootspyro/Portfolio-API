@@ -1,0 +1,24 @@
+service : Rootspyro Portfolio API
+
+useDotenv : true
+
+pluggins : 
+- serverless-offline
+
+provider:
+  name : aws
+  runtime: nodejs14.x
+  environment : 
+    MONGODB_STR : ${env:MONGODB_STR}
+    SECRET : ${env:SECRET}
+
+functions:
+  main:
+    handler: dist/lambda.handler
+    events: 
+      - http: 
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
