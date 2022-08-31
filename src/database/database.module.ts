@@ -21,25 +21,3 @@ import {MongooseModule} from "@nestjs/mongoose";
   exports: [MongooseModule]
 })
 export class DatabaseModule {}
-/*
-@Module({
-  imports : [
-    ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGODB_STR)
-  ],
-  providers : [
-    {
-      provide : 'MONGO',
-      useFactory : async () => {
-        const uri = process.env.MONGODB_STR;
-        const client = new MongoClient(uri);
-        await client.connect();
-        const database = client.db('API');
-        return database;
-      }
-    }
-  ],
-  exports: ['MONGO', MongooseModule]
-})
-export class DatabaseModule {}
-*/
