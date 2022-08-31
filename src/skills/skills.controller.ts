@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Query} from '@nestjs/common';
 import { SkillsService } from './skills.service';
-import { ApiTags} from '@nestjs/swagger';
+import { ApiTags, ApiQuery} from '@nestjs/swagger';
 import { MongoIdPipe } from '../mongo-id.pipe';
 
 
@@ -10,7 +10,10 @@ export class SkillsController {
 
   constructor( private skService : SkillsService ){}
 
+
   @Get()
+  @ApiQuery({name : 'name', required : false})
+  @ApiQuery({name : 'type', required : false})
   Skills(
     @Query('name') name : string = '.',
     @Query('type') type : string = '.',

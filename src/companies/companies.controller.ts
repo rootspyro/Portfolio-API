@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiQuery } from '@nestjs/swagger';
 import { CompaniesService } from './companies.service';
 import { MongoIdPipe } from '../mongo-id.pipe';
 
@@ -9,6 +9,8 @@ export class CompaniesController {
   constructor( private companieService : CompaniesService ){}
 
   @Get()
+  @ApiQuery({name : 'name', required : false})
+  @ApiQuery({name : 'country', required : false})
   Companies(
     @Query('name') name : string = '.',
     @Query('country') country : string = '.',
