@@ -22,7 +22,7 @@ functions:
           path: /
           cors:
             origins: 
-            - 'https://portfolio-ui-ten.vercel.app'
+            - 'https://rootspyro.com'
             allowCredentials: true
             headers:
               - Content-Type
@@ -38,7 +38,7 @@ functions:
           path: '{proxy+}'
           cors: 
             origins: 
-            - 'https://portfolio-ui-ten.vercel.app'
+            - 'https://rootspyro.com'
             allowCredentials: true
             headers:
               - Content-Type

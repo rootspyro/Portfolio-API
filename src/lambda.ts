@@ -15,10 +15,8 @@ async function bootstrap() {
 
   app.setGlobalPrefix("dev/api")
 
-  const whitelist = ['https://rootspyro.com', 'https://portfolio-ui-ten.vercel.app'];
-
   app.enableCors({
-    origin : 'https://portfolio-ui-ten.vercel.app'
+    origin : 'https://rootspyro.com'
   })
 
   //SWAGGER
