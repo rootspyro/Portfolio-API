@@ -49,6 +49,16 @@ export class DevelopersController {
     return this.devService.getDevProjects(id);
   }
 
+  @Get(":id/projects/personal")
+  DevProjectsPersonal(@Param('id', MongoIdPipe) id : string){
+    return this.devService.getPersonalProjects(id);
+  }
+
+  @Get(":id/projects/work")
+  DevProjectsWork(@Param('id', MongoIdPipe) id : string){
+    return this.devService.getWorkProjects(id);
+  }
+
   @Get(":id/contact")
   DevContact(@Param('id', MongoIdPipe) id : string){
     return this.devService.getDevContact(id);

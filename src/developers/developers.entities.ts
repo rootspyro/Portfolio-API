@@ -62,24 +62,44 @@ export class Developers{
       }
     ];
   };
-  @Prop({type : Array })
-  projects : [
-    {
-      name : string;
-      project_type : string;
-      description : string;
-      web_uri : string;
-      repo_uri : string;
-      technologies : [
-        {
-          skill_id : string;
-          name : string;
-          level : string;
-          icon : string;
-        }
-      ];
-    }
-  ];
+  @Prop({type : Object })
+  projects : {
+    personal : [
+      {
+        name : string;
+        project_type : string;
+        description : string;
+        web_uri : string;
+        repo_uri : string;
+        technologies : [
+          {
+            skill_id : string;
+            name : string;
+            level : string;
+            icon : string;
+          }
+        ]
+      }
+    ],
+    work : [
+      {
+        name : string;
+        project_type : string;
+        description : string;
+        web_uri : string;
+        company_id : string;
+        company_name: string;
+        technologies : [
+          {
+            skill_id : string;
+            name : string;
+            level : string;
+            icon : string;
+          }
+        ]
+      }
+    ],
+  }
   @Prop({type : Array })
   contact : object;
   @Prop({type : Array })
@@ -228,30 +248,51 @@ export class DeveloperJob {
 // PROJECTS SCHEMAS
 
 export class DeveloperProjects { 
-  data : DeveloperProject[]
+  data : {
+    work : WorkProjects;
+  }
   links : {
     self : string;
   }
 }
 
-export class DeveloperProject {
+export class PersonalProjects {
+  data : PersonalProject[];
+  links : {
+    self : string;
+  }
+}
+
+export class PersonalProject {
   data : {
     name : string;
-    project_type : string;
     description : string;
     web_uri : string;
     repo_uri : string;
     technologies : ProjectTechs
   }
-  meta : object;
+}
+
+export class WorkProjects {
+  data : WorkProject[];
+  links : {
+    self : string;
+  }
+}
+
+export class WorkProject {
+  data : {
+    name : string;
+    description : string;
+    web_uri : string;
+    company_id : string;
+    company_name: string;
+    technologies : ProjectTechs
+  }
 }
 
 export class ProjectTechs {
   data : ProjectTech[]
-  links : {
-    self : string;
-    related : string;
-  }
 }
 
 export class ProjectTech {

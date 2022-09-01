@@ -6,7 +6,11 @@ import {
   DeveloperSkills,
   DeveloperSkill,
   DeveloperProjects,
-  DeveloperContact
+  DeveloperContact,
+  PersonalProjects,
+  PersonalProject,
+  WorkProjects,
+  WorkProject
 } from './developers.entities';
 
 export function DevelopersResponse(entity : any) : DevelopersEntity { 
@@ -221,45 +225,113 @@ export function BackendResponse(entity : any) : DeveloperSkill {
 }
 
 export function ProjectsResponse(entity : any) : DeveloperProjects {
-
-  let projects = [];
-
-  entity.projects.map((project : any) => {
-
-    let data =
-      {
-        data : {
-          name : project.name,
-          project_type : project.project_type,
-          description : project.description,
-          web_uri : project.web_uri,
-          repo_uri : project.repo_uri,
-          technologies : []
-        },
-        meta : project.meta
-      }
-
-    project.technologies.map((tech : any) => {
-      data.data.technologies.push({
-        data : {
-          name : tech.name
-        },
-        links : {
-          related : `/skills/${tech.skill_id}`
-        }
-      }) 
-    })
-
-    projects.push(data);
-  })
-
+  
   let response = {
-    data : projects,
+    data : {
+      personal : PersoProjectsResponse(entity),
+      work : WorkProjectsResponse(entity)
+    },
     links : {
       self : `/developers/${entity._id}/projects`
     }
   }
   return response;
+}
+
+export function PersoProjectsResponse( entity : any ) : PersonalProjects {
+
+  let projects = [];
+
+  entity.projects.personal.map(( project : any ) => {
+    projects.push( PersoProject(project) )
+  })
+
+  return { 
+    data : projects,
+    links : {
+      self : `/developers/${entity._id}/projecs/personal`
+    }
+  }
+
+}
+
+export function PersoProject( entity : any ) : PersonalProject {
+
+  let techs = {
+    data : []
+  }
+  entity.technologies.map((tech : any) => {
+    techs.data.push(
+      {
+        data : {
+          skill_id : tech.skill_id,
+          name : tech.name
+        },
+        links : {
+          related : `/skills/${tech.skill_id}`
+        }
+      }
+    )
+  })
+
+  return {
+    data : {
+      name : entity.name,
+      description : entity.description,
+      web_uri : entity.web_uri,
+      repo_uri : entity.repo_uri,
+      technologies : techs
+    }
+  }
+}
+
+export function WorkProjectsResponse(entity : any) : WorkProjects {
+
+  let projects = [];
+
+  entity.projects.work.map(( project : any ) => {
+    projects.push( PersoProject(project) )
+  })
+
+  return { 
+    data : projects,
+    links : {
+      self : `/developers/${entity._id}/projecs/work`
+    }
+  }
+
+}
+
+export function WProject(entity : any) : WorkProject {
+
+  let techs = {
+    data : []
+  }
+  entity.technologies.map((tech : any) => {
+    techs.data.push(
+      {
+        data : {
+          skill_id : tech.skill_id,
+          name : tech.name
+        },
+        links : {
+          related : `/skills/${tech.skill_id}`
+        }
+      }
+    )
+  })
+
+  return {
+    data : {
+      name : entity.name,
+      description : entity.description,
+      web_uri : entity.web_uri,
+      company_id : entity.company_id,
+      company_name : entity.company_name,
+      technologies : techs,
+    }
+  }
+
 }
 
 export function ContactResponse( entity : any ) : DeveloperContact {
