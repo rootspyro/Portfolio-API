@@ -290,7 +290,7 @@ export function WorkProjectsResponse(entity : any) : WorkProjects {
   let projects = [];
 
   entity.projects.work.map(( project : any ) => {
-    projects.push( PersoProject(project) )
+    projects.push( WProject(project) )
   })
 
   return { 
