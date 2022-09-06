@@ -61,6 +61,7 @@ export function DeveloperResponse(entity : any) : DeveloperEntity {
         country : entity.country,
         region : entity.region,
         city : entity.city,
+        english_level: entity.english_level,
         img_uri : entity.img_uri,
         studies : StudiesResponse(entity),
         skills : SkillsResponse(entity),
@@ -174,7 +175,7 @@ export function FrontendResponse(entity : any) : DeveloperSkill {
         data : {
           name : skill.name,
           level : skill.level,
-          icon : skill.icon
+          years : skill.years
         },
         links : {
           related : `/skills/${skill.skill_id}`
@@ -204,7 +205,7 @@ export function BackendResponse(entity : any) : DeveloperSkill {
         data : {
           name : skill.name,
           level : skill.level,
-          icon : skill.icon
+          years : skill.years
         },
         links : {
           related : `/skills/${skill.skill_id}`

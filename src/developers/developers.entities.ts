@@ -21,6 +21,8 @@ export class Developers{
   @Prop()
   city : string;
   @Prop()
+  english_level : string;
+  @Prop()
   img_uri : string;
   @Prop({ type : Array })
   studies : [
@@ -129,6 +131,7 @@ export class DeveloperSummary {
       country : string;
       region : string;
       city : string;
+      english_level: string;
       img_uri : string;
     }
   }
@@ -208,7 +211,7 @@ class Tech {
   data : {
     name : string;
     level : string;
-    icon : string;
+    years : number;
   }
   links : {
     related : string;
