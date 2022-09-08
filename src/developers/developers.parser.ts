@@ -153,7 +153,8 @@ export function SkillsResponse(entity : any) : DeveloperSkills {
   let response = {
     data : {
       frontend : FrontendResponse(entity),
-      backend : BackendResponse(entity)
+      backend : BackendResponse(entity),
+      utils : UtilsResponse(entity)
     },
     links : {
       self : `/developers/${entity._id}/skills`,
@@ -218,6 +219,37 @@ export function BackendResponse(entity : any) : DeveloperSkill {
     data : backSkills,
     links : {
       self : `/developers/${entity._id}/skills/backend`
+    }
+  } 
+
+  return response;
+
+}
+
+
+export function UtilsResponse(entity : any) : DeveloperSkill {
+
+  let utilSkills = [];
+
+  entity.skills.utils.map((skill : any) => {
+    utilSkills.push(
+      {
+        data : {
+          name : skill.name,
+          level : skill.level,
+          years : skill.years
+        },
+        links : {
+          related : `/skills/${skill.skill_id}`
+        }
+      }
+    )
+  })
+
+  let response = {
+    data : utilSkills,
+    links : {
+      self : `/developers/${entity._id}/skills/utils`
     }
   } 
 

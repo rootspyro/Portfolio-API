@@ -9,11 +9,12 @@ import {
   ExperienceResponse,
   FrontendResponse,
   BackendResponse,
+  UtilsResponse,
   SkillsResponse,
   ProjectsResponse,
   PersoProjectsResponse,
+  WorkProjectsResponse,
   ContactResponse, 
-  WorkProjectsResponse
 } from './developers.parser'
 
 @Injectable()
@@ -53,6 +54,11 @@ export class DevelopersService {
   async getDevBackend( id : string ) {
     let response = await this.devModel.findById(id , { "skills.backend" : 1});
     return BackendResponse(response);
+  }
+
+  async getDevUtils( id : string ) { 
+    let response = await this.devModel.findById(id , { "skills.utils" : 1});
+    return UtilsResponse(response);
   }
 
   async getDevProjects( id : string ) {

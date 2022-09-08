@@ -41,12 +41,21 @@ export class Developers{
       {
         skill_id : string,
         name : string,
-
       }
     ];
     backend : [
-
+      {
+        skill_id : string,
+        name : string,
+      }
     ];
+    utils : [
+      {
+        skill_id : string,
+        name : string,
+      }
+    ];
+
   }
   @Prop({type : Object })
   experience : {
@@ -192,6 +201,7 @@ export class DeveloperSkills {
   data : {
     frontend : DeveloperSkill;
     backend : DeveloperSkill;
+    utils : DeveloperSkill;
   }
   links : {
     self : string;
